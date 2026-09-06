@@ -1,0 +1,33 @@
+parameter,unit,2010_prius,ls_600h,camry,2004_prius,leaf_2012,accord_g,accord_m,source,comments
+stator_od,cm,26.4,20.0,26.4,26.9,20.0,29.202,29.134,both,
+stator_id,cm,16.19,13.086,16.19,16.19,13.10,19.660,19.660,both,
+stator_stack_length,cm,5.08,13.54,6.07,8.4,15.1,3.762,6.17,both,
+rotor_od,cm,16.04,12.91,16.05,16.05,13.0,19.504,19.500,both,
+rotor_lamination_id,cm,5.1,5.3,10.5,11.1,,11.80,,both,
+rotor_stack_length,cm,5.0165,13.59,6.2,8.36,,,,both,
+air_gap,mm,0.73,0.89,0.73025,0.73025,,0.78,0.8,both,LEAF air gap not reported in either table
+lamination_thickness,mm,0.305,0.28,0.31,0.33,,0.34,,both,LEAF value 0.3 mm is given only in the AMR presentation
+rotor_mass,kg,6.7,11.93,9.03,10.2,16.432,8.260,11.810,both,Includes rotor shaft
+stator_mass,kg,15.99,18.75,18.0,25.9,,14.4,20.815,both,
+stator_core_mass,kg,10.36,15.15,12.38,19.05,,,,both,Laminations only; Accord G given as Est
+n_stator_slots,-,48,48,48,48,48,48,48,both,
+turns_per_coil,-,11,7,14,9,8,,,both,Accord M given as 11? in the source
+parallel_circuits_per_phase,-,0,2,2,0,4,2,,both,Expressed as legs in the source; 0 means none
+coils_in_series_per_phase,-,8,4,4,8,2,4,,both,LS 600h Camry Accord G per leg; LEAF 2 per leg
+n_wires_in_parallel,-,12,9,9,13,15,11,10,both,Per leg where the machine has parallel legs
+wire_size,AWG,20,20,20,19,20,18,18,both,LS 600h given as ~0.032 in; LEAF and Accord given as approximate
+phase_resistance_21C,ohm,0.077,0.0225,0.023,0.069,0.00567,,,both,Average of phase-to-phase divided by two; LEAF approximate
+stator_copper_mass,kg,4.93,3.59,5.6,6.8,5.616,,,both,Accord G given as Est
+slot_depth,mm,30.9,19.25,30.9,33.5,,28.59,28.19,both,Gap to slot bottom; Accord approximate
+slot_opening,mm,1.88,1.88,1.88,1.93,,2.037,2.037,both,At air-gap; Accord approximate
+motor_casing_mass,kg,14.1,14,14.67,8.9,,,,TM-2010/253 T2.7,Resolver pump etc
+motor_casing_diameter,cm,30.2,27.5,30.2,29.9,,,,TM-2010/253 T2.7,
+motor_casing_axial_length,cm,16.1,27.9,17.0,20.5,,,,TM-2010/253 T2.7,
+magnet_dimensions_raw,mm,49.3x17.88x7.16,66.4x18.7x3.05,60.6x19.1x6.6,83.1x18.9x6.5,21.3x8.34x2.29 + 28.9x8.36x3.79,26.5x6.28x~37.62,26.5x6.28x~61.7,both,Verbatim from source; LEAF has two magnet segments per pole
+magnet_length,mm,49.3,66.4,60.6,83.1,,,,both,Split from magnet_dimensions_raw; see README on ordering
+magnet_width,mm,17.88,18.7,19.1,18.9,,,,both,Split from magnet_dimensions_raw; see README on ordering
+magnet_thickness,mm,7.16,3.05,6.6,6.5,,,,both,Split from magnet_dimensions_raw; see README on ordering
+magnet_volume,cm3,6.31,3.78,7.63,10.2,,6.26,10.27,both,One magnet
+magnet_mass,g,48,28.1,58,77,,47.2,77.50,both,One magnet; Accord G approximate
+total_magnet_mass,kg,0.768,1.349,0.928,1.232,1.895,0.755,1.24,both,Entire magnet mass in rotor
+magnet_mass_per_power_rating,g/kW,12.8,8.43,8.84,22.4,23.69,,10.0,SPR-2014/532 T1,Total magnet mass divided by published power rating

@@ -1,0 +1,17 @@
+vehicle,subsystem,component,n_devices,bond_count_per_device,a_die_mm2,a_total_mm2
+LS 600h,motor_inverter,IGBT,12,,163.3,1960
+LS 600h,motor_inverter,diode,12,,100.2,1202
+LS 600h,boost_converter,IGBT,6,,163.3,980
+LS 600h,boost_converter,diode,6,,100.2,601
+Camry,motor_inverter,IGBT,18,27,120.3,2165
+Camry,motor_inverter,diode,18,12,71,1278
+Camry,boost_converter,IGBT,8,18,177,1400
+Camry,boost_converter,diode,8,17,104,830
+2004 Prius,motor_inverter,IGBT,12,20,131.9,1583
+2004 Prius,motor_inverter,diode,12,5,40.7,488
+2004 Prius,boost_converter,IGBT,4,21,228,910
+2004 Prius,boost_converter,diode,4,28,119,475
+2010 Prius,motor_inverter,IGBT,12,3,109.4,1313
+2010 Prius,motor_inverter,diode,12,3,67.5,809
+2010 Prius,boost_converter,IGBT,4,5,224.4,898
+2010 Prius,boost_converter,diode,4,5,111.7,447

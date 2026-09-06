@@ -1,0 +1,41 @@
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generated output
+results/
+plots/
+*.png
+!docs/images/*.png
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# Reference materials / datasheets
+docs/refs/
+docs/datasheets/
+docs/references/papers/
+docs/references/**/*.pdf
+
+# Claude Code
+.claude/*
+!.claude/skills/
+
+# Machine-local drive scripts (never committed)
+notes/scratch/
+
+# mutation-testing scratch (mutmut)
+mutants/
+.mutmut-cache
+
+# Extracted PDF figures (regenerable from the PDFs)
+docs/references/**/*_images/

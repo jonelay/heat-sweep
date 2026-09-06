@@ -1,0 +1,48 @@
+heatsweep
+Copyright 2026 Jone Lay
+
+Licensed under the Apache License, Version 2.0. See the LICENSE file.
+
+--------------------------------------------------------------------------
+
+This distribution contains no third-party source code.
+
+It does bundle device parameter files, under `devices/` and
+`heatsweep/devices/`, whose numeric values are transcribed from, or
+estimated from, the third-party sources below. Those values are factual
+measurements and published specifications rather than third-party
+expression, and each file records its own provenance and test conditions
+in the accompanying README and TOML. The sources are listed here for
+attribution.
+
+Oak Ridge National Laboratory, operated by UT-Battelle, LLC for the
+U.S. Department of Energy:
+
+  ORNL/TM-2004/247   Evaluation of 2004 Toyota Prius Hybrid Electric
+                     Drive System (Interim). Drivetrain loss
+                     decomposition, back-EMF vs speed.
+  ORNL/TM-2005/33    Report on Toyota Prius Motor Thermal Management
+  (FY2005)           (900 rpm line-fed, 35–105 °C coolant).
+  ORNL/TM-2006/423   Evaluation of the 2004 Toyota Prius hybrid electric
+                     drive system. Inverter packaging, die photography,
+                     thermal stack, full-envelope dyno data.
+  ORNL/TM-2010/253   Die measurements, SEM cross-sections, solder EDS
+                     analysis, 2004 vs 2010 thermal comparison,
+                     continuous duty.
+  ORNL/TM-2013/498   Benchmarking State-of-the-Art Technologies.
+                     Cross-vehicle design comparison.
+  ORNL/SPR-2014/532  Electrical and Electronic Technical Team Roadmap.
+                     HEV benchmarking context.
+  DOE Annual Merit Review APE006 (2013), T. Burress and Z. Liang —
+                     2012 Nissan LEAF inverter and motor data.
+
+Manufacturer datasheets, used as technology and current-rating analogues
+where no measured Prius device data exists:
+
+  International Rectifier IRG4PC50U (600 V / 55 A NPT IGBT)
+  Mitsubishi CM100DU-12F (600 V / 100 A F-series IGBT module)
+
+Parameter values derived from these sources are estimates unless the
+device file marks them measured. They are not endorsed by, and imply no
+affiliation with, ORNL, UT-Battelle, the U.S. Department of Energy,
+Toyota, Nissan, International Rectifier, or Mitsubishi Electric.

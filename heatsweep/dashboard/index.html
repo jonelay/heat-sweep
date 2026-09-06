@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>heat-sweep</title>
+  <!-- theme attribute set before the stylesheet loads: no light flash -->
+  <script>document.documentElement.dataset.theme = localStorage.getItem("hs-theme") || "light";</script>
+  <link rel="stylesheet" href="/view-sweep/css/viewsweep.css">
+  <link rel="stylesheet" href="/view-sweep/spec/palettes/engineering.css">
+  <!-- Plotly is a peer dependency of view-sweep and is not vendored here.
+       The cartesian bundle is loaded from the Plotly CDN; when it is not
+       reachable the loss breakdown renders as a table instead. -->
+  <script src="https://cdn.plot.ly/plotly-cartesian-3.6.0.min.js" crossorigin="anonymous"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { display: flex; flex-direction: column; }
+    .hs-form { display: grid; grid-template-columns: auto 1fr; gap: 4px 8px; align-items: center; font-size: 0.92em; }
+    .hs-form label { color: var(--vs-text-muted); }
+    .hs-form input, .hs-form select { width: 100%; box-sizing: border-box; font: inherit; }
+    .hs-form .vs-btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+    .hs-table { border-collapse: collapse; width: 100%; font-size: 0.92em; }
+    .hs-table th, .hs-table td { text-align: left; padding: 3px 8px; border-bottom: 1px solid var(--vs-hairline); white-space: nowrap; }
+    .hs-table th { color: var(--vs-text-muted); font-weight: 500; }
+    .hs-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .hs-table tr.selectable { cursor: pointer; }
+    .hs-table tr.selected td { background: color-mix(in srgb, var(--vs-accent-ink) 12%, transparent); }
+    .hs-panes { padding: 0; display: grid; gap: 1px; background: var(--vs-hairline); overflow-y: auto; flex: 1 1 auto; min-height: 0; }
+    .hs-panes > .vs-panel { background: var(--vs-surface); }
+  </style>
+</head>
+<body>
+  <header id="topbar" class="vs-topbar">
+    <span class="vs-brand">heat-sweep</span>
+    <span id="subtitle" class="vs-caption">loss and thermal results</span>
+    <button id="theme-toggle" class="vs-btn vs-theme-toggle"></button>
+  </header>
+  <div id="conn-banner" class="vs-banner" hidden>connection lost — retrying; job events may be missed</div>
+  <div id="layout" class="vs-layout">
+    <aside id="sidebar" class="vs-sidebar">
+      <section class="vs-side-section">
+        <h2>Run</h2>
+        <form id="run-form" class="hs-form" autocomplete="off">
+          <label for="f-device">device</label><select id="f-device" name="device"></select>
+          <label for="f-model">model</label><select id="f-model" name="model"></select>
+          <label for="f-topology">topology</label><select id="f-topology" name="topology"></select>
+          <label for="f-fsw">f_sw (Hz)</label><input id="f-fsw" name="f_sw_Hz" type="number" value="10000" step="any">
+          <label for="f-vdc">V_dc (V)</label><input id="f-vdc" name="V_dc" type="number" value="400" step="any">
+          <label for="f-irms">I_phase (A rms)</label><input id="f-irms" name="I_phase_rms" type="number" value="50" step="any">
+          <label for="f-fout">f_out (Hz)</label><input id="f-fout" name="f_out_Hz" type="number" value="50" step="any">
+          <label for="f-pf">pf</label><input id="f-pf" name="pf" type="number" value="0.9" step="any" min="-1" max="1">
+          <label for="f-m">m_index</label><input id="f-m" name="m_index" type="number" value="0.8" step="any" min="0" max="1">
+          <label for="f-tamb">T_amb (degC)</label><input id="f-tamb" name="T_amb_C" type="number" value="25" step="any">
+          <label for="f-rthcs">Rth_cs (K/W)</label><input id="f-rthcs" name="Rth_cs" type="number" value="0.2" step="any" min="0">
+          <button id="run-btn" class="vs-btn" type="submit">Run</button>
+        </form>
+      </section>
+      <section class="vs-side-section">
+        <h2>Models</h2>
+        <div id="model-list"></div>
+      </section>
+    </aside>
+    <main id="main-area" class="vs-main">
+      <div id="panes" class="hs-panes"></div>
+    </main>
+  </div>
+  <footer id="statusbar"></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

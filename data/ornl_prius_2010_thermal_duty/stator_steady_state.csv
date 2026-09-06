@@ -1,0 +1,3 @@
+vehicle,power_kW,speed_rpm,coolant_C,stator_stabilized_C,source_figure,basis
+2010 Prius,25,5000,50,123,3.25,approximate (stabilized near 123 degC; no limit reached)
+2010 Prius,25,7000,25,110,3.30,approximate (stabilized at about 110 degC; no limit reached)

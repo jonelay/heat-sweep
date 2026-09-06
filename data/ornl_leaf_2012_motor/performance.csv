@@ -1,0 +1,10 @@
+quantity,unit,value,speed_rpm_low,speed_rpm_high,dc_link_V,coolant_C,source,evidence
+motor_peak_efficiency,%,97,5000,9000,375,65,APE006,measured (stated as above 97%)
+inverter_peak_efficiency,%,99,,,375,65,APE006,measured (stated as above 99% at high speeds)
+combined_peak_efficiency,%,96,,,375,65,APE006,measured (stated as above 96%)
+system_peak_efficiency,%,94,,,,,TM-2013/498 T1,measured (stated as ~94%)
+continuous_power,kW,80,7000,7000,375,65,APE006,measured; stator temperature levelled at about 135 degC
+published_duty_80kW_1h,kW,80,,,,,Nissan SAE 2011,published by Nissan; not an ORNL measurement
+published_duty_70kW_0p5h,kW,70,,,,,Nissan SAE 2011,published by Nissan; not an ORNL measurement
+published_duty_60kW_0p5h,kW,60,,,,,Nissan SAE 2011,published by Nissan; not an ORNL measurement
+published_duty_50kW_1h,kW,50,,,,,Nissan SAE 2011,published by Nissan; not an ORNL measurement

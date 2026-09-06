@@ -1,0 +1,87 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "heatsweep"
+version = "0.1.0"
+description = "Power-electronics thermal design exploration"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Jone Lay", email = "jlay.dev@pm.me" }]
+keywords = ["thermal", "power-electronics", "IGBT", "MOSFET", "semiconductor-loss"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+    "Typing :: Typed",
+]
+dependencies = ["numpy", "scipy"]
+
+[project.urls]
+Repository = "https://github.com/jonelay/heat-sweep"
+Issues = "https://github.com/jonelay/heat-sweep/issues"
+Documentation = "https://github.com/jonelay/heat-sweep/blob/main/docs/device-toml.md"
+
+[project.optional-dependencies]
+viz = ["matplotlib"]
+test = ["pytest", "pytest-timeout", "ruff", "mypy", "httpx"]
+dev = [
+    "heatsweep[viz,test,server]",
+]
+fem = [
+    "gmsh>=4.15.2",
+]
+server = [
+    "fastapi",
+    "uvicorn[standard]",
+    "structlog",
+    "view-sweep-server",
+]
+
+[project.scripts]
+heatsweep-server = "heatsweep.server.__main__:main"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "docs/internal/",
+    "docs/references/",
+    "docs/datasheets/",
+    "notes/",
+    "scripts/",
+    ".claude/",
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".gitlab-ci.yml",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.mypy]
+files = ["heatsweep"]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = ["scipy.*", "gmsh"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+timeout = 30
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+[tool.uv.sources]

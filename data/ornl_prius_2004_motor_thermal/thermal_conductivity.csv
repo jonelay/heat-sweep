@@ -1,0 +1,11 @@
+component,k_W_per_m_C,notes
+stator_rotor_iron_radial,51.9,lamination stack radial direction
+stator_rotor_iron_axial,5.21,lamination stack axial direction (1/10 of radial)
+slot_insulation_wedge,0.125,
+copper_windings,400.0,
+pm_magnet,47.3,
+stator_oil_air_mixture_low,0.408,oil/air/insulation mixture in stator (low end)
+stator_oil_air_mixture_high,2.71,oil/air/insulation mixture in stator (high end)
+stator_rotor_gap,10.0,oil/air convective mixture approximated as high-k solid (Couette flow)
+contact_rotor_slinger,0.10,contact resistance
+contact_stator_housing,0.075,contact resistance

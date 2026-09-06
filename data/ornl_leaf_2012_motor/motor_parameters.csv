@@ -1,0 +1,18 @@
+parameter,unit,value,source,basis
+peak_power_rating,kW,80,APE006,published rating verified by ORNL test
+peak_torque_rating,Nm,280,APE006,published rating verified by ORNL test
+speed_rating,rpm,10390,APE006,published rating
+motor_mass,kg,56,APE006,approximate; as received
+motor_volume,L,19,APE006,approximate
+stator_od,cm,19.812,APE006,approximate; SPR-2014/532 T1 rounds to 20.0
+rotor_od,cm,12.997,APE006,SPR-2014/532 T1 rounds to 13.0
+stator_stack_length,cm,15.1,APE006,agrees with SPR-2014/532 T1
+n_poles,-,8,APE006,IPM
+n_stator_slots,-,48,APE006,agrees with SPR-2014/532 T1
+lamination_thickness,mm,0.3,APE006,stated as 0.012 in; blank in SPR-2014/532 T1
+n_stator_cooling_channels,-,3,APE006,water-ethylene glycol loops in stator housing
+resolver_stator_teeth,-,10,APE006,
+resolver_rotor_poles,-,4,APE006,salient lobes
+final_drive_ratio,-,7.94,APE006,transaxle
+motor_specific_power,kW/kg,1.43,TM-2013/498 T1,APE006 comparison table rounds to 1.4
+motor_power_density,kW/L,4.21,TM-2013/498 T1,APE006 comparison table rounds to 4.2

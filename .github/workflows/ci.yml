@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Tier 0 — full extras
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: uv sync --extra test
+      - name: Scrub inventory (warning only)
+        run: uv run python scripts/scrub_gate.py --count-only .
+      - name: Lint
+        run: uv run ruff check heatsweep/ tests/
+      - name: Type check
+        run: uv run mypy heatsweep
+      - name: Test
+        run: uv run pytest -m "not slow" -q -rs
+
+  core:
+    name: Tier 0 — core only
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - name: Install core deps only
+        run: uv sync
+      - name: Smoke-test lean import
+        run: uv run python -c "import heatsweep"

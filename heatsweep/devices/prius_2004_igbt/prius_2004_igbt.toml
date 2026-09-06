@@ -1,0 +1,102 @@
+# 2004 Toyota Prius THS-II MG2 (traction motor) Inverter IGBT
+#
+# MG2 only. The MG1 generator inverter uses 1 die per switch position
+# instead of 2 in parallel, and no ORNL report publishes its die
+# geometry, so it has no counterpart file. See the README.
+#
+# Custom Toyota/Denso bare-die 600V Si IGBT, planar gate, NPT.
+# No public datasheet exists. Parameters estimated from comparable
+# commercial devices (IR IRG4PC50U, Mitsubishi CM100DU-12F) and ORNL
+# teardown measurements. See README.md for provenance of each field.
+#
+# The motor inverter has 2 parallel die per switch position, 6 switch
+# positions per 3-phase bridge (12 IGBTs + 12 diodes total).
+# This TOML describes ONE die.
+#
+# source: estimated from ORNL teardown + comparable devices (see README.md)
+# die area: 131.9 mm^2 IGBT, 40.7 mm^2 diode (ORNL/TM-2010/253 Table 2.5)
+# substrate: DBA (Direct Bond Aluminum) on AlN, NOT DBC
+# total thermal path: 9.0 mm junction to coolant (ORNL Fig 2.28)
+
+[device]
+name = "prius_2004_igbt"
+type = "igbt"
+package = "bare_die"
+manufacturer = "Toyota/Denso"
+V_max = 600.0       # V — DC bus boosted to 500V max, 600V device class
+I_max = 125.0       # A — per-die peak (250A peak phase / 2 parallel)
+Tj_max = 175.0      # degC — typical 2004-era automotive Si IGBT
+
+[conduction]
+# V_ce(I_c, Tj) = V_ce0(Tj) + r_ce(Tj) * I_c
+# Gives V_ce_sat = 1.6V at 100A — matches CM100DU-12F at Tj=125C.
+# Die area 131.9 mm^2, planar gate structure (ORNL confirmed).
+V_ce0 = 0.8         # V — threshold voltage (reference, Tj=125C)
+r_ce = 0.008        # Ohm — slope resistance (reference, Tj=125C)
+[conduction.conditions]
+Tj = 125.0           # degC
+I_c = 100.0          # A — reference current for V_ce_sat validation
+V_ge = 15.0          # V — standard gate drive (CM100DU-12F test condition)
+
+# Tj-dependent conduction tables.
+# Estimated from IRG4PC50U (600V NPT, same family as switching source).
+# V_ce0 decreases ~15% from 25C to 150C (typical NPT IGBT negative tempco).
+# r_ce increases ~1.5x from 25C to 150C (positive tempco, mobility reduction).
+# Tangent-line fit method per Semikron Application Manual 2015, Section 5.1.
+[conduction.V_ce0_vs_Tj]
+Tj =    [25.0,  125.0,  150.0]
+V_ce0 = [0.90,  0.80,   0.75]
+[conduction.V_ce0_vs_Tj.conditions]
+I_c = 100.0
+V_ge = 15.0
+
+[conduction.r_ce_vs_Tj]
+Tj =   [25.0,   125.0,  150.0]
+r_ce = [0.005,  0.008,  0.009]
+[conduction.r_ce_vs_Tj.conditions]
+I_c = 100.0
+V_ge = 15.0
+
+[body_diode]
+# Anti-parallel Si diode, separate die (40.7 mm^2, ORNL measured).
+# V_f from CM100DU-12F typ at rated current, scaled for smaller die.
+# Q_rr from CM100DU-12F (1.9 uC measured at Tj=25C, Vcc=300V, Ic=100A).
+# Not rescaled to 125C/400V — used as-is; actual Q_rr at higher Tj and
+# V_R would be larger, so this is a mild underestimate.
+V_f = 1.8            # V — forward voltage at rated current
+Q_rr = 2.0e-6        # C — reverse recovery charge (source: 25C/300V)
+k_Tj = 0.006         # /K — Q_rr linear tempco (Q_rr at 125C ~1.6x 25C value)
+                     #       Semikron Application Manual 2015 §5.2
+[body_diode.conditions]
+Tj = 25.0            # degC — CM100DU-12F measurement condition
+I_F = 100.0          # A
+V_R = 300.0          # V — CM100DU-12F measurement condition
+
+[switching]
+# Per-die switching energies at stated conditions.
+# Estimated from IR IRG4PC50U (Gen 4 NPT, 600V/55A) scaled to Prius
+# operating current, cross-checked with CM100DU-12F timing estimates.
+#
+# NPT planar IGBTs have Eoff >> Eon (ratio ~3-4x) due to tail current.
+# Energies scale approximately linearly with V_dc and I_c.
+# Table values are formula-generated from linear scaling, not multi-point
+# measurements — no measured switching data exists for this custom die.
+I =     [25.0,     50.0,     100.0,    150.0,    200.0]     # A
+E_on =  [0.30e-3,  0.60e-3,  1.20e-3,  1.80e-3,  2.40e-3]  # J
+E_off = [1.00e-3,  2.00e-3,  4.00e-3,  6.00e-3,  8.00e-3]  # J
+scaling = "linear"
+k_Tj_on = 0.002      # /K — E_on linear tempco, conservative for NPT IGBT
+k_Tj_off = 0.004     # /K — E_off linear tempco, NPT tail current rises with Tj
+                     #       Infineon AN2019-05, Semikron Application Manual 2015 §5.2
+[switching.conditions]
+V_dc = 400.0         # V — typical boosted bus voltage during acceleration
+R_g = 5.0            # Ohm — IRG4PC50U test condition; Prius gate R unknown
+V_ge = 15.0          # V — standard gate drive
+Tj = 150.0           # degC — matches IRG4PC50U scaling source temperature
+
+[thermal]
+# Rth_jc estimated from comparable devices at similar die area:
+# CM100DU-12F = 0.35 K/W (module, per switch position)
+# Prius die (131.9 mm^2) on DBA/AlN, 9.0 mm total path to coolant.
+# No Foster chain — no transient thermal data published for this device.
+Rth_jc = 0.35        # K/W — junction to case (DBA surface), per die

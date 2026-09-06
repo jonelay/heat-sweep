@@ -1,0 +1,12 @@
+[switching]
+# Default dead time (s) when not specified
+t_dead_s = 1e-6
+
+[thermal]
+# Default ambient temperature (degC)
+T_amb_C = 25.0
+# Default assumed junction temperature for loss calc (degC)
+Tj_assumed_C = 100.0
+# Self-consistent P(Tj) iteration limits
+max_iter = 50
+tol_K = 0.01

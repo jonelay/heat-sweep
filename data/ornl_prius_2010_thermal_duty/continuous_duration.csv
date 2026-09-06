@@ -1,0 +1,19 @@
+vehicle,power_kW,speed_rpm,coolant_C,stator_limit_C,duration_s,source_figure,basis
+2010 Prius,25,3000,25,100,616,3.22,stated as 10:16
+2010 Prius,25,3000,25,130,1729,3.22,stated as 28:49
+2010 Prius,50,5000,50,150,274,3.23,stated as 4:34
+2010 Prius,50,7000,25,150,319,3.24,stated as 5:19
+2010 Prius,25,3000,25,120,1200,3.27,approximate lower bound (over 20 min)
+2010 Prius,25,3000,50,120,540,3.27,approximate (about 9 min)
+2010 Prius,25,3000,65,120,420,3.27,approximate (about 7 min)
+2010 Prius,25,5000,25,105,2700,3.28,approximate (about 45 min)
+2010 Prius,25,5000,50,105,1500,3.28,approximate (about 25 min)
+2010 Prius,25,5000,65,105,540,3.28,approximate (about 9 min)
+2010 Prius,25,7000,65,145,1800,3.30,approximate (30 min)
+2010 Prius,50,7000,65,150,180,3.30,approximate (about 3 min)
+2010 Prius,25,5000,50,150,1500,section 4,approximate (about 25 min); conflicts with Fig 3.25 stabilization
+2010 Prius,25,3000,50,150,360,section 4,approximate (about 6 min)
+2010 Prius,60,4000,,150,18,section 3.4,FCVT 18-second peak power rating; coolant not stated
+2010 Prius,50,5000,,140,240,3.29,approximate (about 4 min); coolant not stated
+LS 600h,50,5000,,140,600,3.29,approximate (about 10 min); coolant not stated
+Camry,50,5000,,140,600,3.29,approximate (about 10 min); coolant not stated

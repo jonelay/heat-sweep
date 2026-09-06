@@ -1,0 +1,102 @@
+# 2012 Nissan LEAF PEM thermal stack — one IGBT die, junction to chassis face.
+#
+# Source: DOE AMR 2013 project APE006 (Burress, ORNL), PEM analysis by
+# Zhenxian Liang. Transcribed in devices/leaf_2012_igbt/README.md.
+#
+# The five layers from `die` to `baseplate` are ORNL-measured thicknesses.
+# The grease/insulator/grease group below the base plate is described by
+# ORNL but never dimensioned, so those three thicknesses and all thermal
+# properties are estimates — see README §Declared assumptions.
+#
+# NOTE: unlike the 2004 Prius stack there is no `total_path_m`. ORNL
+# publishes no junction-to-coolant path length for the LEAF, and inventing
+# one would defeat the runtime check that field exists to provide.
+#
+# Units: lengths in m, k in W/(m K), rho in kg/m^3, cp in J/(kg K).
+# Layers are listed top (junction) to bottom (cooled face). Each layer's
+# `footprint` is "die" (die-sized), "tile" (Cu-Mo spreader) or "plate"
+# (full modeled cold-plate region).
+
+[geometry]
+die_w_m = 15.0e-3       # ORNL measured, 15 x 15 mm IGBT die
+die_l_m = 15.0e-3       # (diode die is 14 x 14 mm and is not modeled here)
+tile_w_m = 20.0e-3      # Cu-Mo spreader: estimated, not published
+tile_l_m = 20.0e-3
+plate_w_m = 40.0e-3     # modeled cold-plate unit cell (adiabatic sides);
+plate_l_m = 40.0e-3     # matched to the 2004 Prius cell so the two compare
+
+[boundary]
+h_conv_W_m2K = 5000.0   # matched to the 2004 Prius stack, not LEAF-specific
+T_coolant_C = 65.0      # ORNL test coolant temperature (APE006), W-EG
+
+[[layer]]
+name = "die"
+material = "silicon"
+t_m = 0.361e-3          # ORNL measured
+k_W_mK = 148.0
+rho_kg_m3 = 2330.0
+cp_J_kgK = 700.0
+footprint = "die"
+
+[[layer]]
+name = "die_attach"
+material = "solder"
+t_m = 0.180e-3          # ORNL measured
+k_W_mK = 57.0
+rho_kg_m3 = 7400.0
+cp_J_kgK = 220.0
+footprint = "die"
+
+[[layer]]
+name = "spacer"
+material = "CuMo"
+t_m = 2.55e-3           # ORNL measured; CTE-matching heat spreader
+k_W_mK = 170.0          # estimated (15Cu-85Mo class)
+rho_kg_m3 = 10000.0     # estimated
+cp_J_kgK = 280.0        # estimated
+footprint = "tile"
+
+[[layer]]
+name = "spacer_solder"
+material = "solder"
+t_m = 0.208e-3          # ORNL measured
+k_W_mK = 57.0
+rho_kg_m3 = 7400.0
+cp_J_kgK = 220.0
+footprint = "tile"
+
+[[layer]]
+name = "baseplate"
+material = "copper"
+t_m = 3.17e-3           # ORNL measured; NOT electrically isolated
+k_W_mK = 398.0
+rho_kg_m3 = 8960.0
+cp_J_kgK = 385.0
+footprint = "plate"
+
+[[layer]]
+name = "grease_upper"
+material = "silicone_grease"
+t_m = 0.05e-3           # estimated — ORNL states the layer, not its thickness
+k_W_mK = 3.0            # estimated
+rho_kg_m3 = 2600.0
+cp_J_kgK = 1000.0
+footprint = "plate"
+
+[[layer]]
+name = "insulator"
+material = "silicone_insulator"
+t_m = 0.20e-3           # estimated — ORNL states "thin silicone based insulator"
+k_W_mK = 2.0            # estimated (filled silicone sheet)
+rho_kg_m3 = 1800.0
+cp_J_kgK = 1100.0
+footprint = "plate"
+
+[[layer]]
+name = "grease_lower"
+material = "silicone_grease"
+t_m = 0.05e-3           # estimated — ORNL states the layer, not its thickness
+k_W_mK = 3.0            # estimated
+rho_kg_m3 = 2600.0
+cp_J_kgK = 1000.0
+footprint = "plate"
